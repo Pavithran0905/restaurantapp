@@ -1,0 +1,118 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<style>
+    /* Container for the form to center it and add a glass-morphism effect */
+    .form-container {
+        max-width: 500px;
+        margin: 2rem auto;
+        padding: 3rem;
+        background-color: #e5e4e4; /* Matches the accent-dark from your layout */
+        border: 1px solid #252321; /* Gourmet gold border */
+        border-radius: 8px;
+        box-shadow: 0 10px 30px rgba(255, 143, 143, 0.748);
+    }
+
+    .form-container h1 {
+        text-align: center;
+        color: #750909;
+        margin-bottom: 2rem;
+        font-family: 'Playfair Display', serif; /* Or your preferred elegant font */
+        letter-spacing: 1px;
+    }
+
+    /* Style for the form itself */
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    label {
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: #3d1616;
+        font-size: 0.9rem;
+    }
+
+    /* Input styling */
+    input {
+        margin-bottom: 1.5rem;
+        padding: 0.8rem;
+        background-color: #c6caca;
+        border: 1px solid #444;
+        border-radius: 4px;
+        color: #000000;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+    }
+
+    input:focus {
+        outline: none;
+        border-color: #0d0c0b;
+    }
+
+    /* Customizing the date/time picker icons to look better on dark mode */
+    input[type="date"]::-webkit-calendar-picker-indicator,
+    input[type="time"]::-webkit-calendar-picker-indicator {
+        filter: invert(1);
+        cursor: pointer;
+    }
+
+    /* Button styling */
+    .btn {
+        background-color: #c5a059;
+        color: #1a1a1a;
+        padding: 1rem;
+        border: none;
+        border-radius: 4px;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 1rem;
+    }
+
+    .btn:hover {
+        background-color: #e2b86d;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(197, 160, 89, 0.3);
+    }
+
+    .btn:active {
+        transform: translateY(0);
+    }
+</style>
+
+<div class="form-container">
+    <h1>Book a Table</h1>
+    <form action="/reservation" method="POST">
+
+        <label>Selected Restaurant:</label>
+        <input type="text" id="selected-restaurant" name="restaurant_name" readonly required>
+
+        <label>Full Name:</label>
+        <input type="text" name="name" placeholder="Name" required>
+        
+        <label>Date:</label>
+        <input type="date" name="date" required>
+
+        <label>Time:</label>
+        <input type="time" name="time" required>
+        
+        <label>Number of Guests:</label>
+        <input type="number" name="guests" min="1" max="10" value="2" required>
+        
+        <button type="submit" class="btn">Confirm Booking</button>
+    </form>
+</div>
+
+
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const restaurantName = urlParams.get('restaurant');
+    if (restaurantName) {
+        document.getElementById('selected-restaurant').value = restaurantName;
+    }
+</script>
+{% endblock %}

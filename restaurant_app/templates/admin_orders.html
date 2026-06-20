@@ -1,0 +1,159 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<style>
+    /* Scoped styling to keep our red, white, and orange theme isolated */
+    .admin-container {
+        --theme-red: #E53935;
+        --theme-orange: #FF6D00;
+        --theme-white: #FFFFFF;
+        --theme-light-gray: #FAFAFA; /* Off-white for row contrast */
+        --theme-border: #F5F5F5;
+        --theme-text-dark: #212121; /* High contrast dark for readability */
+
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background-color: var(--theme-white);
+        font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    .admin-title {
+        color: var(--theme-red);
+        font-size: 2.25rem;
+        margin-bottom: 2rem;
+        border-bottom: 3px solid var(--theme-orange);
+        padding-bottom: 0.5rem;
+        font-weight: 700;
+    }
+
+    .table-responsive {
+        width: 100%;
+        overflow-x: auto;
+        box-shadow: 0 4px 12px rgba(229, 57, 53, 0.08); /* Subtle red tint shadow */
+        border-radius: 8px;
+        border: 1px solid var(--theme-border);
+    }
+
+    .logs-table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: var(--theme-white);
+        text-align: left;
+    }
+
+    .logs-table th {
+        background-color: var(--theme-red);
+        color: var(--theme-white);
+        padding: 16px;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        letter-spacing: 0.5px;
+    }
+
+    .logs-table td {
+        padding: 16px;
+        border-bottom: 1px solid var(--theme-border);
+        color: var(--theme-text-dark);
+        font-size: 0.95rem;
+        vertical-align: middle;
+    }
+
+    /* Soft orange highlighting for the ID column to anchor the design */
+    .order-id {
+        color: var(--theme-orange);
+        font-weight: bold;
+    }
+
+    /* Alternating row colors for data density comfort */
+    .logs-table tbody tr:nth-child(even) {
+        background-color: var(--theme-light-gray);
+    }
+
+    /* Hover effect using an incredibly light orange background tint */
+    .logs-table tbody tr:hover {
+        background-color: rgba(255, 109, 0, 0.05);
+    }
+
+    /* Styled Delete Button to fit the destructive action */
+    .btn-delete {
+        display: inline-block;
+        background-color: var(--theme-red);
+        color: var(--theme-white);
+        text-decoration: none;
+        padding: 6px 14px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        border-radius: 4px;
+        transition: background-color 0.2s ease, transform 0.1s ease;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    .btn-delete:hover {
+        background-color: var(--theme-orange);
+    }
+
+    .btn-delete:active {
+        transform: scale(0.96);
+    }
+
+    .back-link-container {
+        margin-top: 2rem;
+    }
+
+    .back-link {
+        color: var(--theme-orange);
+        text-decoration: none;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .back-link:hover {
+        color: var(--theme-red);
+        transform: translateX(-4px);
+    }
+</style>
+
+<div class="admin-container">
+    <h1 class="admin-title">Order Logs</h1>
+    
+    <div class="table-responsive">
+        <table class="logs-table">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Items Ordered</th>
+                    <th>Restaurant Name</th>
+                    <th>Quantity</th>
+                    <th>Address</th>
+                    <th>Payment Method</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td class="order-id">{{ order['id'] }}</td>
+                    <td>{{ order['item_name'] }}</td>
+                    <td>{{ order['restaurant_name'] }}</td>
+                    <td>{{ order['quantity'] }}</td>
+                    <td>{{ order['address'] }}</td>
+                    <td>{{ order['payment'] }}</td>
+                    <td>
+                        <a href="/delete_order/{{ order['id'] }}" class="btn-delete">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="back-link-container">
+        <a href="/admin" class="back-link">&larr; Back to Admin Page</a>
+    </div>
+</div>
+{% endblock %}
