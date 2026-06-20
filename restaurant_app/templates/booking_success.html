@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div style="max-width: 500px; margin: 4rem auto; padding: 20px; text-align: center; font-family: sans-serif;">
+    
+    <!-- Success Container Box -->
+    <div style="border: 2px solid #ff0000; padding: 40px 30px; border-radius: 12px; box-shadow: 0 10px 30px rgba(255, 0, 0, 0.1); background-color: #ffffff; color: #000000;">
+        
+        <!-- Energetic Orange Tick Icon -->
+        <div style="width: 70px; height: 70px; background: #ffa500; color: #ffffff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 40px; font-weight: bold; margin: 0 auto 20px auto;">
+            ✓
+        </div>
+        
+        <h1 style="color: #ff0000; margin-bottom: 10px; font-size: 2rem; font-weight: 800; text-transform: uppercase; letter-spacing: -0.5px;">Booking Confirmed!</h1>
+        <p style="color: #444444; margin-bottom: 30px; font-size: 0.95rem;">Your table has been successfully reserved. We look forward to serving you.</p>
+        
+        <hr style="border: 0; border-top: 2px dashed #ffa500; margin-bottom: 25px;">
+        
+        <!-- Reservation Summary Card -->
+        <div style="text-align: left; background: #ffffff; padding: 20px; border-radius: 8px; border: 1px solid #ffa500; border-left: 6px solid #ff0000;">
+            <h4 style="margin-top: 0; color: #ff0000; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; margin-bottom: 15px; border-bottom: 2px solid #ffa500; padding-bottom: 5px;">Reservation Details</h4>
+
+            <p style="margin: 10px 0; font-size: 0.95rem; color: #000000;"><strong>Restaurant Name:</strong> <span style="color: #444444;">{{ restaurant_name }}</span></p>
+            <p style="margin: 10px 0; font-size: 0.95rem; color: #000000;"><strong>Guest Name:</strong> <span style="color: #444444;">{{ name }}</span></p>
+            <p style="margin: 10px 0; font-size: 0.95rem; color: #000000;"><strong>Date:</strong> <span style="color: #444444;">{{ date }}</span></p>
+            <p style="margin: 10px 0; font-size: 0.95rem; color: #000000;"><strong>Time:</strong> <span style="color: #444444;">{{ time }}</span></p>
+            <p style="margin: 10px 0; font-size: 0.95rem; color: #000000;"><strong>Total Guests:</strong> <span style="color: #444444;">{{ guests }} Pax</span></p>
+        </div>
+        
+        <!-- Navigation Button -->
+        <div style="margin-top: 35px;">
+            <a href="{{ url_for('home') }}" style="background-color: #ffa500; color: #ffffff; text-decoration: none; padding: 0.8rem 2rem; border-radius: 4px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; display: inline-block; font-size: 0.85rem; border: 2px solid #ff0000; transition: transform 0.2s;">
+                Back to Home
+            </a>
+        </div>
+        
+    </div>
+</div>
+{% endblock %}

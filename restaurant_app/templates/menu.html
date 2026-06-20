@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='menustyle.css') }}">
+<div class="menu-grid">
+    {% for item in items %}
+    <!-- Link-ah mathi irukkom: item_detail function-ku item.id-ya anupuvom -->
+    <a href="{{ url_for('item_detail', item_id=item.id) }}" style="text-decoration: none; color: inherit;">
+        <div class="menu-card" style="cursor: pointer;">
+            <img src="{{ url_for('static', filename='images/' + item.image_path) }}" 
+                 alt="{{ item.name }}" class="menu-image">
+            
+            <h3>{{ item.name }}</h3>
+            <p><strong>Category:</strong> {{ item.category }}</p>
+            <p>{{ item.description }}</p>
+            <span class="price-tag">${{ item.price }}</span>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+{% endblock %}
